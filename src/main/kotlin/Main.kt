@@ -1,7 +1,52 @@
-fun main(args: Array<String>) {
-    println("Hello World!")
+import java.util.Arrays
+import java.util.Date
 
-    // Try adding program arguments via Run/Debug configuration.
-    // Learn more about running applications: https://www.jetbrains.com/help/idea/running-applications.html.
-    println("Program arguments: ${args.joinToString()}")
+data class Post(
+    val id: Int, // Идентификатор записи
+    val ownerId: Int, // Id владельца стены
+    val fromId: Int, // Id автора записи
+    val date: Date = Date(),
+    val text: String,
+    val replyOwnerId: Int, // Id владельца записи, в ответ на которую была оставлена текущая
+    val replyPostId: Int, // Id записи, в ответ на которую была оставлена текущая
+    val friendsOnly: Boolean = false, // 1, если запись была создана с опцией «Только для друзей».
+    val canPin: Boolean = false,
+    val canDelete: Boolean = false,
+    val likes: Likes = Likes(),
+    val views: Views = Views()
+)
+
+class Likes(
+    val count: Int = 0, // число пользователей, которым понравилась запись
+    val userLikes: Boolean = false,
+    val canLike: Boolean = true,
+    val canPublish: Boolean = true
+)
+
+class Views(
+    val count: Int = 0 //число просмотров записи
+)
+
+object WallService {
+    private var postsOnTheWall = emptyArray<Post>()
+
+    fun add(post: Post): Post {
+        var lastId = post.id
+        postsOnTheWall += post.copy(id = ++lastId)
+        return postsOnTheWall.last()
+    }
+
+    fun update(post: Post): Boolean {
+        for ((id, post) in postsOnTheWall.withIndex()) {
+            if (post.id == id) {
+                postsOnTheWall[id] = post.copy()
+            }
+        }
+        return true
+    }
+
+}
+
+fun main(args: Array<String>) {
+    println(WallService.add(Post(1,0,0, date = Date(), "First post", 5, 6)))
 }
