@@ -40,13 +40,15 @@ object WallService {
         for ((id, post) in postsOnTheWall.withIndex()) {
             if (post.id == id) {
                 postsOnTheWall[id] = post.copy()
+                return true
             }
         }
-        return true
+        return false
     }
 
 }
 
 fun main(args: Array<String>) {
-    println(WallService.add(Post(1,0,0, date = Date(), "First post", 5, 6)))
+  println(WallService.add(Post(1,0,0, date = Date(), "First post", 5, 6)))
+
 }
