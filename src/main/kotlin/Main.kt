@@ -1,4 +1,3 @@
-import java.util.Arrays
 import java.util.Date
 
 data class Post(
@@ -36,10 +35,10 @@ object WallService {
         return postsOnTheWall.last()
     }
 
-    fun update(post: Post): Boolean {
-        for ((id, post) in postsOnTheWall.withIndex()) {
-            if (post.id == id) {
-                postsOnTheWall[id] = post.copy()
+    fun update(updatePost: Post): Boolean {
+        for ((index, post) in postsOnTheWall.withIndex()) {
+            if (post.id == updatePost.id) {
+                postsOnTheWall[index] = post.copy()
                 return true
             }
         }
@@ -50,5 +49,8 @@ object WallService {
 
 fun main(args: Array<String>) {
   println(WallService.add(Post(1,0,0, date = Date(), "First post", 5, 6)))
+    val x = WallService.add(Post(1,0,0, date = Date(), "First post", 5, 6))
+
+    println(x)
 
 }
