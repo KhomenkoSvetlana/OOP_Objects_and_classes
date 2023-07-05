@@ -55,6 +55,6 @@ object WallService {
 
 fun main(args: Array<String>) {
     WallService.add(Post(1, 0, 0, date = Date(), "First post", 5, 6))
-    WallService.add(Post(5, 4, 7, date = Date(), "First post", 3, 6))
+    WallService.add(Post(5, 4, 7, date = Date(), "Second post", 3, 6))
     WallService.print()
 }
