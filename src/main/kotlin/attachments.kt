@@ -1,7 +1,12 @@
+<<<<<<< HEAD
+=======
+
+>>>>>>> d1ceaaca1eee8493581c2fa64030d184ce16bfc0
 interface Attachments {
     val type : String
 }
 
+<<<<<<< HEAD
 data class AttachmentsPhoto (val photo: Photo): Attachments {
     override val type: String = "photo"
 }
@@ -20,6 +25,31 @@ data class AttachmentsDoc (val doc: Doc) : Attachments {
 
 data class AttachmentsLink (val link: Link) : Attachments {
     override val type: String = "link"
+=======
+/*class AttachmentsPhoto () : Attachments {
+    override val type: Photo
+
+}
+
+class AttachmentsVideo () : Attachments {
+    override val type: Video
+
+}
+
+class AttachmentsAudio () : Attachments {
+    override val type: Audio
+
+}
+
+class AttachmentsDoc () : Attachments {
+    override val type: Doc
+
+}
+
+class AttachmentsLink () : Attachments {
+    override val type: Link
+
+>>>>>>> d1ceaaca1eee8493581c2fa64030d184ce16bfc0
 }
 
 
@@ -54,5 +84,9 @@ class Link(
     val url : String,
     val title: String,
     val description: String //Описание ссылки
+<<<<<<< HEAD
 )
+=======
+)*/
+>>>>>>> d1ceaaca1eee8493581c2fa64030d184ce16bfc0
 

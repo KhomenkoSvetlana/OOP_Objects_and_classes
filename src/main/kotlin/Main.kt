@@ -44,6 +44,7 @@ object WallService {
         }
         return false
     }
+<<<<<<< HEAD
 
     fun print(){
         for (post in postsOnTheWall) {
@@ -51,10 +52,16 @@ object WallService {
         }
         println()
     }
+=======
+>>>>>>> d1ceaaca1eee8493581c2fa64030d184ce16bfc0
 }
 
 fun main(args: Array<String>) {
     WallService.add(Post(1, 0, 0, date = Date(), "First post", 5, 6))
+<<<<<<< HEAD
     WallService.add(Post(5, 4, 7, date = Date(), "Second post", 3, 6))
     WallService.print()
+=======
+    WallService.add(Post(5, 4, 7, date = Date(), "First post", 3, 6))
+>>>>>>> d1ceaaca1eee8493581c2fa64030d184ce16bfc0
 }
