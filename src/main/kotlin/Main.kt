@@ -28,10 +28,10 @@ class Views(
 
 object WallService {
     private var postsOnTheWall = emptyArray<Post>()
+    private var lastId = 0
 
     fun add(post: Post): Post {
-        var lastId = post.id
-        postsOnTheWall += post.copy(id = ++lastId)
+        postsOnTheWall += post.copy(id = post.id + lastId)
         return postsOnTheWall.last()
     }
 
@@ -44,13 +44,9 @@ object WallService {
         }
         return false
     }
-
 }
 
 fun main(args: Array<String>) {
-  println(WallService.add(Post(1,0,0, date = Date(), "First post", 5, 6)))
-    val x = WallService.add(Post(1,0,0, date = Date(), "First post", 5, 6))
-
-    println(x)
-
+    WallService.add(Post(1, 0, 0, date = Date(), "First post", 5, 6))
+    WallService.add(Post(5, 4, 7, date = Date(), "First post", 3, 6))
 }
