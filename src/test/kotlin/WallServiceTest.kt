@@ -40,5 +40,50 @@ class WallServiceTest {
         assertFalse(result)
     }
 
+    @Test
+    fun createComment () {
+        val service = WallService
+        service.add(Post(1, 1, 1, date = Date(), "test1", 1, 1))
+        val create = service.createComment(1, comment = Comment(1,0,date = Date(), "test"))
+
+        val createResult = create.postId
+
+        assertEquals(createResult, 1)
+    }
+
+    @Test(expected = PostNotFoundException::class)
+    fun shouldThrow() {
+        val service = WallService
+        service.add(Post(1, 1, 1, date = Date(), "test1", 1, 1))
+        val create = service.createComment(3, comment = Comment(1,0,date = Date(), "test"))
+    }
+
+    @Test
+    fun reportComment () {
+        val service = WallService
+        service.add(Post(1, 1, 1, date = Date(), "test1", 1, 1))
+        service.createComment(1, comment = Comment(1,1, date = Date(), "test"))
+
+        val reportComment = service.reportComment(complainNew = Complain(1, 7))
+        val result = reportComment //не понимаю как присовоить переменной result значение commentId сщзданной жалобы???
+
+    }
+
+    @Test(expected = ComplainArgumentException::class)
+    fun ComplainArgumentException() {
+        val service = WallService
+        service.add(Post(1, 1, 1, date = Date(), "test1", 1, 1))
+        service.createComment(1, comment = Comment(1,1, date = Date(), "test"))
+        val report = service.reportComment(complainNew = Complain(1, 9))
+    }
+
+    @Test (expected = ComplainNotFoundId::class)
+    fun ComplainNotFoundId() {
+        val service = WallService
+        service.add(Post(1, 1, 1, date = Date(), "test1", 1, 1))
+        service.createComment(1, comment = Comment(1,1, date = Date(), "test"))
+        val report = service.reportComment(complainNew = Complain(2, 1))
+    }
+
 
 }
