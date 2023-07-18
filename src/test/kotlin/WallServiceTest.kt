@@ -59,14 +59,27 @@ class WallServiceTest {
     }
 
     @Test
-    fun reportComment () {
+    fun reportCommentId () {
         val service = WallService
         service.add(Post(1, 1, 1, date = Date(), "test1", 1, 1))
         service.createComment(1, comment = Comment(1,1, date = Date(), "test"))
 
         val reportComment = service.reportComment(complainNew = Complain(1, 7))
-        val result = reportComment //не понимаю как присовоить переменной result значение commentId сщзданной жалобы???
+        val result = reportComment.commentId
 
+        assertEquals(result, 1)
+    }
+
+    @Test
+    fun reportCommentReason () {
+        val service = WallService
+        service.add(Post(1, 1, 1, date = Date(), "test1", 1, 1))
+        service.createComment(1, comment = Comment(1,1, date = Date(), "test"))
+
+        val reportComment = service.reportComment(complainNew = Complain(1, 7))
+        val result = reportComment.reason
+
+        assertEquals(result, 7)
     }
 
     @Test(expected = ComplainArgumentException::class)

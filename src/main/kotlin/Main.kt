@@ -78,7 +78,7 @@ object WallService {
         throw PostNotFoundException("Post Not Found Exception")
     }
 
-    fun reportComment(complainNew: Complain) {
+    fun reportComment(complainNew: Complain): Complain {
         var sum: Int = 0
 
         for ((index, comment) in commentOnThePost.withIndex()) {
@@ -87,9 +87,10 @@ object WallService {
                 require(complainNew.reason in 1..8) {
                     throw ComplainArgumentException("Invalid parameter")
                 }
+
                 complain += complainNew.copy()
 
-                var report: String = when (complainNew.reason) {
+                val report: String = when (complainNew.reason) {
                     1 -> "спам"
                     2 -> "детская порнография"
                     3 -> "экстремизм"
@@ -101,12 +102,11 @@ object WallService {
                 }
                 println("Комментарий содержит $report.")
                 sum ++
+                return complain.last()
             }
         }
 
-        if (sum == 0) {
-            throw ComplainNotFoundId ("Complain Not FoundId")
-        }
+        return throw ComplainNotFoundId ("Complain Not Found Id")
     }
 }
 
@@ -121,5 +121,5 @@ fun main(args: Array<String>) {
     WallService.print()
     WallService.createComment(1, comment = Comment(1, text = "comment"))
     WallService.createComment(1, comment = Comment(1, 1, text = "second comment"))
-    WallService.reportComment(complainNew = Complain(1, 6))
+    WallService.reportComment(complainNew = Complain(1, 5))
 }
